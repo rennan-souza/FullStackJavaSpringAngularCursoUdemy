@@ -1,0 +1,59 @@
+<div id="layoutAuthentication">
+  <div id="layoutAuthentication_content">
+    <main class="contianer">
+      <div class="row justify-content-center">
+        <div class="col-md-3">
+          <div class="card shadow-lg border-0 rounded mt-5">
+            <div class="card-header">
+              <h3 class="text-center font-weight-light my-4">
+                {{ cadastrando ? 'Cadastrar' : 'Login' }}
+              </h3>
+            </div>
+            <div class="card-body">
+
+              <div class="alert alert-success" *ngIf="mensagemSucesso">
+                {{ mensagemSucesso }}
+              </div>
+
+              <div class="alert alert-danger" *ngIf="errors"> 
+                <span *ngFor="let erro of errors"> {{ erro }} <br> </span>
+              </div>
+
+              <form #loginForm="ngForm" (submit)="onSubmit()">
+                <div class="form-group">
+                  <label class="mb-1">Login</label>
+                  <input type="text" name="username" class="form-control py-4" [(ngModel)]="username" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                  <label class="mb-1">Senha</label>
+                  <input type="password" name="password" class="form-control py-4" [(ngModel)]="password">
+                </div>
+
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-lg btn-block" *ngIf="!cadastrando">Entrar</button>
+
+                  <button type="button" class="btn btn-primary btn-lg" 
+                    *ngIf="cadastrando"
+                      (click)="cadastrar()">
+                    Cadastrar
+                  </button>
+
+                  <button type="button" class="btn btn-danger btn-lg ml-1" 
+                    *ngIf="cadastrando" 
+                    (click)="cancelarCadastro()">
+                    Cancelar
+                  </button>
+
+                </div>
+              </form>
+            </div>
+            <div class="card-footer text-muted">
+              Ainda não tem conta? <a href="#" (click)="preparaCadastrar($event)">Registrar-se</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
